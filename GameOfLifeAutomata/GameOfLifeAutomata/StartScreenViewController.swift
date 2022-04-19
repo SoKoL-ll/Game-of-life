@@ -4,39 +4,32 @@ import SwiftUI
 
 class StartScreenViewController: UIViewController {
     var hostingController: UIHostingController<StartScreen>?
-    var secondHostingController: UIHostingController<ChooseScreen>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         let mainViewController = MainScreenViewController()
-        
-        let chooseType = { () -> Void in
-            let elementary = { () -> Void in
-                self.navigationController?.setViewControllers([mainViewController], animated: true)
-                mainViewController.setElementaryAutomata(sender: UIAlertAction())
-                self.secondHostingController!.dismiss(animated: true, completion: nil)
-            }
-            
-            let gameOfLife = { () -> Void in
-                self.navigationController?.setViewControllers([mainViewController], animated: true)
-                mainViewController.setGameOfLifeAutomata(sender: UIAlertAction())
-                self.secondHostingController!.dismiss(animated: true, completion: nil)
-            }
+        let elementary = { () -> Void in
+            self.navigationController?.setViewControllers([mainViewController], animated: true)
+            mainViewController.state = mainViewController.resizeState(mainViewController.state)
+            mainViewController.setElementaryAutomata(sender: UIAlertAction())
             self.hostingController!.dismiss(animated: true, completion: nil)
-            let chooseScreen = ChooseScreen(elementary: elementary, gameOfLife: gameOfLife)
-            self.secondHostingController = UIHostingController(rootView: chooseScreen)
-            self.secondHostingController?.modalPresentationStyle = .overFullScreen
-            self.present(self.secondHostingController!, animated: true, completion: nil)
+        }
+        
+        let gameOfLife = { () -> Void in
+            self.navigationController?.setViewControllers([mainViewController], animated: true)
+            mainViewController.state = mainViewController.resizeState(mainViewController.state)
+            mainViewController.setGameOfLifeAutomata(sender: UIAlertAction())
+            self.hostingController!.dismiss(animated: true, completion: nil)
         }
 
         let fetchStateFromDiskCompletion = { (automata: JsonForState?) -> Void in
             guard let automata = automata else {
+                mainViewController.state = mainViewController.resizeState(mainViewController.state)
                 mainViewController.setGameOfLifeAutomata(sender: UIAlertAction())
                 return
             }
-            mainViewController.state = automata.state.fromJsonToState()
-            if automata.code == nil {
+            if (automata.state.type ?? true) {
                 mainViewController.setGameOfLifeAutomata(sender: UIAlertAction())
             } else {
                 mainViewController.setElementaryAutomata(sender: UIAlertAction())
@@ -53,7 +46,8 @@ class StartScreenViewController: UIViewController {
             self.hostingController!.dismiss(animated: true, completion: nil)
         }
         
-        let startScreen = StartScreen(chooseType: chooseType, loadSaveState: loadSaveState)
+        let startScreen = StartScreen(loadSaveState: loadSaveState, elementary: elementary, gameOfLife: gameOfLife)
+        
         hostingController = UIHostingController(rootView: startScreen)
         
         hostingController?.modalPresentationStyle = .overFullScreen

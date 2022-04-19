@@ -8,11 +8,7 @@ struct ListStatesForGlobal: View {
                 
     var body: some View {
         List(previewStates.previewStatesArray) { state in
-            StateForGlobalLibrary(state: state)
-            .frame(
-                width: 1000,
-                height: 20
-            )
+            Text(state.name)
             .onTapGesture {
                 getFromGlobalLibrary(state)
             }

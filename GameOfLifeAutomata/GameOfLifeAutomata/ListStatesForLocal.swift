@@ -5,7 +5,7 @@ struct ListStatesForLocal: View {
     
     let getFromLocalLibrary: GetFromLocalLibrary
     @StateObject var previewStates: PreviewStates
-                
+    
     var body: some View {
         List(previewStates.previewStatesArray) { state in
             Image(uiImage: state.image!)

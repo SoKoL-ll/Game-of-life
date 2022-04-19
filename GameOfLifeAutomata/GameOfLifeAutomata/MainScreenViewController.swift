@@ -45,7 +45,6 @@ class MainScreenViewController: UIViewController, CATiledDataSource, UIScrollVie
     var rectSize = CGSize()
     var finalTopLeftCorner = CGPoint()
     var previousTouch = CGPoint()
-    var moveView: UIView!
     let longTapGestureRecognizer = UILongPressGestureRecognizer(target: nil, action: nil)
     var screensLibrary: ScreensViewController!
     
@@ -69,7 +68,7 @@ class MainScreenViewController: UIViewController, CATiledDataSource, UIScrollVie
         createCATTiled()
         createConstrate()
         listStateForLocal = ListStatesForLocal(
-            getFromLocalLibrary: { (state: State) -> Void in
+            getFromLocalLibrary: { [unowned self] (state: State) -> Void in
                 self.pasteMode(from: state, screen: UIImageView(image: state.image!))
             },
             previewStates: self.cloudStorageManager.previewStatesWithBarrier.previewStates)
@@ -93,7 +92,6 @@ class MainScreenViewController: UIViewController, CATiledDataSource, UIScrollVie
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.state = self.resizeState(self.state)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -516,21 +514,6 @@ class MainScreenViewController: UIViewController, CATiledDataSource, UIScrollVie
         navigationController?.pushViewController(localLibraryController!, animated: true)
     }
     
-    /// Убрать зону для выбора зоны
-    @objc func desableSelectRect(sender: UIBarButtonItem) {
-        self.createBar()
-        self.CATiled.gestureRecognizers?[1].isEnabled = true
-        if (self.isInserting) {
-            self.moveView.removeFromSuperview()
-            self.isInserting = false
-        } else if (self.isHighlighting) {
-            self.selectView.removeFromSuperview()
-            self.isHighlighting = false
-        }
-        self.isResizingDL = false
-        self.isResizingDR = false
-    }
-    
     /// Изменить только активные точки
     @objc func setOnlyActive(sender: UIBarButtonItem) {
         let origin = Point(x: Int(self.selectView.frame.origin.x / 100), y: Int(self.selectView.frame.origin.y / 100))
@@ -681,6 +664,7 @@ class MainScreenViewController: UIViewController, CATiledDataSource, UIScrollVie
         self.nameAutomata = "Game of Life"
         self.navigationItem.title = self.nameAutomata
         typeSimulation = true
+        state.typeOfSimulation = true
     }
     
     /// Правило для игры в жизнь
@@ -710,6 +694,7 @@ class MainScreenViewController: UIViewController, CATiledDataSource, UIScrollVie
         self.nameAutomata = "Elementary Automata"
         self.navigationItem.title = self.nameAutomata
         typeSimulation = false
+        state.typeOfSimulation = false
     }
     
     /// Проверка изменения selectView
@@ -910,6 +895,8 @@ class MainScreenViewController: UIViewController, CATiledDataSource, UIScrollVie
     /// Выбрать состояние поля из снапшота
     func setStatefromSnapshot(from state: State) {
         self.state = state
+        self.CATiledViewWidth.constant = CGFloat(self.state.viewport.size.width * self.CATiledSize)
+        self.CATiledViewHeight.constant = CGFloat(self.state.viewport.size.height * self.CATiledSize)
         drawState()
         self.navigationController?.popToViewController(self, animated: true)
     }

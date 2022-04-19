@@ -8,6 +8,7 @@ struct State: CellularAutomataState, CustomStringConvertible, Identifiable, Equa
     let id: UUID
     var image: UIImage?
     var name: String
+    var typeOfSimulation: Bool?
     var array: [Cell]
     var viewport: Rect {
         willSet {
@@ -21,14 +22,18 @@ struct State: CellularAutomataState, CustomStringConvertible, Identifiable, Equa
         self.id = UUID()
         self.viewport = .zero
         self.array = []
+        self.typeOfSimulation = true
     }
     
-    public init(name: String, id: UUID, viewport: Rect, array: [Cell]) {
+    public init(name: String, id: UUID, viewport: Rect, array: [Cell], image: UIImage?, type: Bool?) {
         self.name = name
         self.id = id
         self.viewport = viewport
         self.array = array
+        self.image = image
+        self.typeOfSimulation = type
     }
+    
     var description: String {
         var result: String = ""
         for y in self.viewport.verticalIndexes {
@@ -141,7 +146,9 @@ struct State: CellularAutomataState, CustomStringConvertible, Identifiable, Equa
                     name: name,
                     description: nil,
                     origin: self.viewport.origin,
+                    image: image,
                     cells: newArray,
-                    user: nil)
+                    user: nil,
+                    type: typeOfSimulation ?? nil)
     }
 }

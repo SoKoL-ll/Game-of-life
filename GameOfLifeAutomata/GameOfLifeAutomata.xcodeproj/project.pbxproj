@@ -31,10 +31,9 @@
 		4C341B96280177C800150284 /* NetworkAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C341B95280177C800150284 /* NetworkAccessManager.swift */; };
 		4C341B98280177DB00150284 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C341B97280177DB00150284 /* StartScreen.swift */; };
 		4C341B9A280177F200150284 /* StartScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C341B99280177F200150284 /* StartScreenViewController.swift */; };
-		4C341B9C2801780C00150284 /* ChooseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C341B9B2801780C00150284 /* ChooseScreen.swift */; };
 		4C341B9E2801782100150284 /* ListStatesForLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C341B9D2801782100150284 /* ListStatesForLocal.swift */; };
 		4C341BA02801783500150284 /* ListStatesForGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C341B9F2801783500150284 /* ListStatesForGlobal.swift */; };
-		4C341BA22801784700150284 /* StateForGlobalLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C341BA12801784700150284 /* StateForGlobalLibrary.swift */; };
+		4C341BA62809F20700150284 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C341BA52809F20700150284 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,10 +82,9 @@
 		4C341B95280177C800150284 /* NetworkAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAccessManager.swift; sourceTree = "<group>"; };
 		4C341B97280177DB00150284 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		4C341B99280177F200150284 /* StartScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenViewController.swift; sourceTree = "<group>"; };
-		4C341B9B2801780C00150284 /* ChooseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseScreen.swift; sourceTree = "<group>"; };
 		4C341B9D2801782100150284 /* ListStatesForLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStatesForLocal.swift; sourceTree = "<group>"; };
 		4C341B9F2801783500150284 /* ListStatesForGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStatesForGlobal.swift; sourceTree = "<group>"; };
-		4C341BA12801784700150284 /* StateForGlobalLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateForGlobalLibrary.swift; sourceTree = "<group>"; };
+		4C341BA52809F20700150284 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C341BA62809F20700150284 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +120,7 @@
 				4C341B632801700300150284 /* GameOfLifeAutomataTests */,
 				4C341B6D2801700300150284 /* GameOfLifeAutomataUITests */,
 				4C341B482801700000150284 /* Products */,
+				4C341BA42809F20700150284 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,10 +159,8 @@
 				4C341B95280177C800150284 /* NetworkAccessManager.swift */,
 				4C341B97280177DB00150284 /* StartScreen.swift */,
 				4C341B99280177F200150284 /* StartScreenViewController.swift */,
-				4C341B9B2801780C00150284 /* ChooseScreen.swift */,
 				4C341B9D2801782100150284 /* ListStatesForLocal.swift */,
 				4C341B9F2801783500150284 /* ListStatesForGlobal.swift */,
-				4C341BA12801784700150284 /* StateForGlobalLibrary.swift */,
 			);
 			path = GameOfLifeAutomata;
 			sourceTree = "<group>";
@@ -182,6 +180,14 @@
 				4C341B702801700300150284 /* GameOfLifeAutomataUITestsLaunchTests.swift */,
 			);
 			path = GameOfLifeAutomataUITests;
+			sourceTree = "<group>";
+		};
+		4C341BA42809F20700150284 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C341BA52809F20700150284 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,7 +329,6 @@
 				4C341B4B2801700000150284 /* AppDelegate.swift in Sources */,
 				4C341B7E280176AE00150284 /* MainScreenViewController.swift in Sources */,
 				4C341B922801779F00150284 /* CloudStorageManager.swift in Sources */,
-				4C341BA22801784700150284 /* StateForGlobalLibrary.swift in Sources */,
 				4C341B8C2801775400150284 /* ScreensViewController.swift in Sources */,
 				4C341B84280176FD00150284 /* CellularAutomataSimulator.swift in Sources */,
 				4C341B9E2801782100150284 /* ListStatesForLocal.swift in Sources */,
@@ -331,7 +336,6 @@
 				4C341B552801700000150284 /* GameOfLifeAutomata.xcdatamodeld in Sources */,
 				4C341B882801772C00150284 /* CATiledView.swift in Sources */,
 				4C341B80280176CC00150284 /* State.swift in Sources */,
-				4C341B9C2801780C00150284 /* ChooseScreen.swift in Sources */,
 				4C341B96280177C800150284 /* NetworkAccessManager.swift in Sources */,
 				4C341B4D2801700000150284 /* SceneDelegate.swift in Sources */,
 				4C341B94280177B400150284 /* JsonForState.swift in Sources */,
@@ -513,6 +517,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GameOfLifeAutomata/GameOfLifeAutomata.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 45YLW7UG43;
@@ -523,6 +528,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -541,6 +547,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GameOfLifeAutomata/GameOfLifeAutomata.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 45YLW7UG43;
@@ -551,6 +558,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

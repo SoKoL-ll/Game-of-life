@@ -59,7 +59,7 @@ class CloudStorageManager {
     
     func saveStateOnDisk(state: State, code: UInt8?) {
         DispatchQueue.global(qos: .utility).async {
-            let fileUrl = self.getOutputFileUrl(file: "state.txt")
+            let fileUrl = self.getOutputFileUrl(file: "snapshot.txt")
             guard let fileUrl = fileUrl else {
                 return
             }
@@ -137,9 +137,7 @@ class CloudStorageManager {
             let decodedStates = self.readPreviewsFrom(fileUrl: fileUrl)
             var statesToAdd = [State]()
             for state in decodedStates {
-                var state = state
                 self.previewStatesInitialOrigins.append(state.viewport.origin)
-                state.translate(to: Point(x: 0, y: 0))
                 statesToAdd.append(state)
             }
             self.previewStatesWithBarrier.append(statesToAdd)
@@ -154,7 +152,7 @@ class CloudStorageManager {
             let decodedStates = previewsJson.map { $0.fromJsonToState() }.filter { !previewStatesIds.contains($0.id) }
             return decodedStates
         } catch {
-            print("Error parsing data from json")
+            print("Error parsing data from json or file is clear")
             return []
         }
     }
@@ -164,6 +162,13 @@ class CloudStorageManager {
     }
     
     func getOutputFileUrl(file: String) -> URL? {
-        return try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: URL(string: "\(file)"), create: true)
+        let fm = FileManager.default
+        if let _ = fm.ubiquityIdentityToken {
+            //print("work")
+        }
+        
+        let pathUrl = fm.url(forUbiquityContainerIdentifier: nil)?.appendingPathComponent("Documents")
+ 
+        return pathUrl?.appendingPathComponent(file)
     }
 }
